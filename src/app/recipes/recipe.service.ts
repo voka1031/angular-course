@@ -15,11 +15,15 @@ export class RecipeService {
 
   recipes: Recipe[] = [
     new Recipe('Tasty Schnitzel', 'A super-tasty Schnitzel - just awesome!', this.URL1, [new Ingredient('Meat', 1), new Ingredient('French Fries', 20)]),
-    new Recipe('recipe 2', 'A test recipe', this.URL2, [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]),
+    new Recipe('Big Fat Burger', 'A test recipe', this.URL2, [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]),
   ];
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  getRecipe(index: number) {
+    return this.recipes[index];
   }
 
   addIngredientToShoppingList(ingredients: Ingredient[]) {
