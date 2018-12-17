@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -12,20 +13,21 @@ export class DataStorageService {
 
   constructor(private httpClient: HttpClient,
     private recipeService: RecipeService,
-    private shoppingListService: ShoppingListService) { }
+    private authService: AuthService) { }
 
-  private dbURL = 'https://ng-recipe-book-b77be.firebaseio.com/recipes.json';
+  private dbURL = 'https://ng-recipe-book-b77be.firebaseio.com/recipes.json?auth=';
 
-  getURL(schema: string) {
-    return this.dbURL + schema + '.json';
+  private getURL() {
+    return this.dbURL + this.authService.getToken();
   }
 
   storeRecipes() {
-    return this.httpClient.put(this.getURL('recipes'), this.recipeService.getRecipes());
+    return this.httpClient.put(this.getURL(), this.recipeService.getRecipes());
   }
 
   getRecipes() {
-    this.httpClient.get<Recipe[]>(this.getURL('recipes'))
+    const token = this.authService.getToken();
+    this.httpClient.get<Recipe[]>(this.getURL())
       .pipe(map(
         (recipes) => {
           for (let recipe of recipes) {
