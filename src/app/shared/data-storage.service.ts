@@ -6,9 +6,7 @@ import { RecipeService } from '../recipes/recipe.service';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../recipes/recipe.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DataStorageService {
 
   constructor(private httpClient: HttpClient,
