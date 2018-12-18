@@ -7,15 +7,15 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li routerLinkActive="active" routerLink="/recipes"><a>Recipes</a></li>
-                <li routerLinkActive="active" routerLink="/shopping-list" *ngIf="authService.inAuthenticated()"><a>Shopping List</a></li>
+                <li routerLinkActive="active" routerLink="/shopping-list" *ngIf="isAuth()"><a>Shopping List</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <ng-template [ngIf]="!authService.inAuthenticated()">
+                <ng-template [ngIf]="!isAuth()">
                     <li routerLinkActive="active"><a routerLink="/signup">Register</a></li>
                     <li routerLinkActive="active"><a routerLink="/signin">Login</a></li>
                 </ng-template>
-                <li><a (click)="onLogout()" *ngIf="authService.inAuthenticated()">Logout</a></li>
-                <li class="dropdown" appDropdown *ngIf="authService.inAuthenticated()">
+                <li><a (click)="onLogout()" *ngIf="isAuth()">Logout</a></li>
+                <li class="dropdown" appDropdown *ngIf="isAuth()">
                     <a class="dropdown-toggle" role="button">
                         Manage
                         <span class="caret"></span>
