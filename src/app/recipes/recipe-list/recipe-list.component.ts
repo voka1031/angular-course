@@ -1,8 +1,9 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from './../recipe.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -15,7 +16,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   constructor(private recipeService: RecipeService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private authService:AuthService) { }
 
   ngOnInit() {
     this.recipes = this.recipeService.getRecipes();

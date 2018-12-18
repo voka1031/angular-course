@@ -1,10 +1,9 @@
-import { AuthService } from './../auth/auth.service';
-import { ShoppingListService } from './../shopping-list/shopping-list.service';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RecipeService } from '../recipes/recipe.service';
+import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../recipes/recipe.model';
+import { RecipeService } from '../recipes/recipe.service';
+import { AuthService } from './../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
@@ -24,7 +23,6 @@ export class DataStorageService {
   }
 
   getRecipes() {
-    const token = this.authService.getToken();
     this.httpClient.get<Recipe[]>(this.getURL())
       .pipe(map(
         (recipes) => {
