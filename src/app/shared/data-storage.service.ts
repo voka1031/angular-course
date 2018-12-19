@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
+import { firebaseConfig } from './../../environments/firebase-config';
 import { AuthService } from './../auth/auth.service';
 
 @Injectable()
@@ -12,8 +13,8 @@ export class DataStorageService {
     private recipeService: RecipeService,
     private authService: AuthService) { }
 
-  // private dbURL2 = 'https://ng-recipe-book-b77be.firebaseio.com/recipes.json?auth=';
-  private dbURL = 'https://ng-recipe-book-b77be.firebaseio.com/recipes.json';
+  private dbURL = firebaseConfig.recipeBookURL;
+  //private dbURL2 = this.dbURL+'?auth=';
 
   // private getURL() {
   //   return this.dbURL2 + this.authService.getToken();
